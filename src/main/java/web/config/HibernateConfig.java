@@ -22,7 +22,7 @@ import java.util.Properties;
 
 @Configuration
 @PropertySource("classpath:db.properties")
-@ComponentScan(value = "web")
+//@ComponentScan(value = "web")
 @EnableTransactionManagement
 public class HibernateConfig {
 
@@ -57,11 +57,15 @@ public class HibernateConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean bean = new LocalContainerEntityManagerFactoryBean();
         bean.setDataSource(dataSource());
-        bean.setPackagesToScan(env.getRequiredProperty("db.entity.package"));
+        bean.setPackagesToScan("web.models");
         bean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         bean.setJpaProperties(properties());
         return bean;
     }
+
+
+
+
 
     @Bean
     public PlatformTransactionManager transactionManager() {
@@ -76,11 +80,4 @@ public class HibernateConfig {
     }
 
 
-
-
-    @Bean
-    public EntityManager makeEntityManager(EntityManagerFactory entityManagerFactory) {
-        return entityManagerFactory.createEntityManager();
     }
-
-}
