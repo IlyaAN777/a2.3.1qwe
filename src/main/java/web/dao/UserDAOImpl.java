@@ -21,4 +21,23 @@ private EntityManager entityManager;
 
         return entityManager.createQuery("select a from User a", User.class).getResultList();
     }
+
+    @Override
+    public User getUserById(long id) {
+        return null;
+    }
+
+    @Override
+    public void saveUser(User user) {
+         entityManager.persist(user);
+    }
+
+    @Override
+    public void deleteById(long id) {
+entityManager.remove(getUserById(id));
+    }
+
+    @Override
+    public void updateUser(long id) {
+    }
 }
