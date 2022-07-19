@@ -3,13 +3,9 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import web.models.User;
 import web.service.UserService;
-import web.service.UserServiceImpl;
-
-import java.util.List;
 
 @Controller
 public class UserController {
@@ -50,7 +46,7 @@ public class UserController {
         model.addAttribute("user", userService.getUserById(id));
         return "/update";
     }
-    @PatchMapping("/{id}")
+    @PostMapping("/update/{id}")
     public String update(@ModelAttribute("user") User user,
                          @PathVariable("id") int id) {
         userService.updateUser(id, user);
